@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const target = { a: 1, b: 2 }
+        const source = { b: 4, c: 5 }
+        const returnedTarget = Object.assign(target, source)
+        console.log(target);
+        console.log(source);
+        console.log(returnedTarget);
+
+        // 复制一个对象
+        const obj = { a: 1 }
+        const copy = Object.assign({}, obj)
+        console.log(copy === obj);
+
+        if (typeof Object.assign !== 'function') {
+            Object.defineProperty(Object, 'assign', {
+                value: function assign(target, varArgs) {
+                    'use strict'
+                    if (target === null || target === undefined) {
+                        throw new TypeError('Cannot convert undefined or null to object')
+                    }
+                    var to = Object(target)
+                    for (var index = 1; index < argument.length; index++) {
+                        var nextSource = argument[index]
+                        if (nextSource !== null && nextSource !== undefined) {
+                            for (var nextKey in nextSource) {
+                                if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                                    to[nextKey] = nextSource[nextKey]
+                                }
+                            }
+                        }
+                    }
+                    return to
+                },
+                writable:true,
+                configurable:true
+            }
+               
+            )
+
+        }
+    </script>
+</body>
+
+</html>

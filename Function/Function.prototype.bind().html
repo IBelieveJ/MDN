@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const module = {
+            x:42,
+            getX:function(){
+                return this.x
+            }
+        }
+        const unboundGetX = module.getX
+        console.log(unboundGetX());
+        const boundGetX1 = unboundGetX.bind(module)
+        console.log(boundGetX1());
+
+        this.x = 9
+        var module1 = {
+            x:81,
+            getX:function(){
+                return this.x
+            }
+        }
+        module1.getX()
+        var retireveX = module1.getX
+        console.log(retireveX());
+        var boundGetX = retireveX.bind(module1)
+        console.log(boundGetX());
+
+        function list(){
+            return Array.prototype.slice.call(arguments)
+        }
+        function addArguments(arg1,arg2){
+            return arg1 + arg2
+        }
+        var list = list(1,2,3)
+        var result1 = addArguments(1,2)
+        // var leadingThirtysevenList = list.bind(null, 37);
+        var addThirtySeven = addArguments.bind(null, 37)
+        // var list2 = leadingThirtysevenList()
+        // var list3 = leadingThirtysevenList(1,2,3)
+        var result2 = addThirtySeven(5)
+        var result3 = addThirtySeven(5,10)
+
+        function LateBloomer(){
+            this.petalCount = Math.ceil(Math.random() * 12) + 1
+        }
+        LateBloomer.prototype.bloom = function(){
+            window.setTimeout(this.declare.bind(this),1000)
+        }
+        LateBloomer.prototype.declare = function(){
+            console.log('I am a beautiful flower with ' + this.petalCount + ' petals!');
+        }
+        var flower = new LateBloomer()
+        flower.bloom()
+
+        function Point(x,y){
+            this.x = x
+            this.y = y
+        }
+        Point.prototype.toString = function(){
+            return this.x + ',' + this.y
+        }
+        var p = new Point(1,2)
+        p.toString()
+        var emptyObj = {}
+        var YAxisPoint = Point.bind(emptyObj,0/*x*/)
+        var YAxisPoint = Point.bind(null,0/*x*/)
+        var axisPoint = new YAxisPoint(5)
+        console.log(axisPoint.toString());
+
+        console.log( axisPoint instanceof Point);
+        console.log(axisPoint instanceof YAxisPoint);
+        console.log(new YAxisPoint(17,42) instanceof Point);
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array1 = ['a','b','c']
+
+        array1.forEach(element => console.log(element))
+
+        const arraySpace = [1, 3, 7]
+        let numCallbackRuns = 0
+
+        arraySpace.forEach(function(element){
+            console.log(element);
+            numCallbackRuns++
+        })
+        console.log('numCallbackRuns:',numCallbackRuns);
+
+        // 将 for 循环转换为 forEach efficient is important
+        // const items = ['item1','item2','item3']
+        // const copy = []
+
+        // for(let i = 0; i < items.length; i++){
+        //     copy.push(items[i])
+        // }
+
+        // items.forEach(function(item){
+        //     copy.push(item)
+        // })
+
+        function logArrayElements(element,index,array){
+            console.log('a[' + index + '] = ' + element);
+        }
+        [1, 2, , 3].forEach(logArrayElements)
+
+        function Counter(){
+            this.sum = 0
+            this.count = 0
+        }
+        Counter.prototype.add = function(array){
+            array.forEach(function(entry){
+                this.sum += entry
+                ++this.count
+                console.log(this,'this');
+            },this)
+        }
+        const obj = new Counter()
+        console.log(obj.add([12,13,13],'a'));
+        console.log(obj.sum);
+        console.log(obj.count);
+
+        function copy(obj){
+            const copy = Object.create(Object.getPrototypeOf(obj))
+            const propNames = Object.getOwnPropertyNames(obj)
+
+            propNames.forEach(function(name){
+                const desc = Object.getOwnPropertyDescriptor(obj, name)
+                Object.defineProperty(copy, name, desc)
+            })
+            return copy
+        }
+        const obj1 = { a: 1, b: 2}
+        const obj2 = copy(obj1)
+        console.log(obj1,obj2);
+        console.log(obj1 === obj2);
+
+        var words = ['one', 'two', 'three', 'four'];
+        words.forEach(function(word) {
+        console.log(word);
+        if (word === 'two') {
+            words.shift();
+        }
+        });
+        console.log(words);
+
+        function flatten(arr){
+            const result = []
+
+            arr.forEach((i) => {
+                if(Array.isArray(i))
+                    result.push(...flatten(i))
+                else
+                    result.push(i)
+            })
+            return result
+        }
+        const problem = [1, 2, 3, [4,5]]
+        console.log(flatten(problem));
+
+        let ratings = [5,4,5]
+        let sum = 0
+        let sumFunction = async function(a,b){
+            return a + b
+        }
+        ratings.forEach(async function(rating){
+            sum = await sumFunction(sum,rating)
+        })
+
+        console.log(sum);
+    </script>
+</body>
+</html>

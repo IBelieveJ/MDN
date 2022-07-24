@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array1 = [1,2,3,4,5]
+
+        const map1 = array1.map(x => x * 2)
+
+        console.log(map1);
+
+        var numbers = [1, 4, 9]
+        var roots = numbers.map(Math.sqrt)
+        console.log(roots);
+
+        var kvArray = [{key: 1, value: 10},
+                       {key: 2, value: 20},
+                       {key: 3, value: 30}]
+
+        var reformattedArray = kvArray.map(function(obj){
+            var rObj = {}
+            rObj[obj.key] = obj.value
+            return rObj
+        })
+        console.log(reformattedArray,kvArray);
+
+        var numbers2 = [1, 4, 9]
+        var doubles = numbers2.map(function(num){
+            return num * 2
+        })
+        console.log(numbers2,doubles);
+
+        var map = Array.prototype.map
+        var a = map.call('Hello World', function(x){
+            return x.charCodeAt(0)
+        })
+        console.log(a);
+
+        // var elems = document.querySelectorAll('select option:check')
+        // var values = Array.prototype.map.call(elems,function(obj){
+        //     return obj.value
+        // })
+        // console.log(elems,values);
+
+        console.log(['1','2','3'].map(parseInt));
+
+        function returnInt(element){
+            return parseInt(element,10)
+        }
+        console.log(['1','2','3'].map(returnInt));
+
+
+        var numbers = [1, 2, 3, 4]
+        var filteredNumbers = numbers.map(function(num,index){
+            if(index < 3){
+                return num
+            }
+        })
+        console.log(filteredNumbers);
+
+        // Polyfill
+        if(!Array.prototype.map){
+            Array.prototype.map = function(callback/*,thisArg*/){
+                var T, A, K
+
+                if(this == null){
+                    throw new TypeError('this is null or not defined')
+                }
+                var O = Object(this)
+                var len = O.length >>> 0
+                if(typeof call !== 'function'){
+                    throw new TypeError(callback + ' is not a function')
+                }
+                if(arguments.length > 1){
+                    T = arguments[1]
+                }
+                A = new Array(len)
+                k = 0
+                while(k < len){
+                    var kValue, mappedValue
+                    if(k in O){
+                        kValue = O[K]
+                        mappedValue = callback.call(T, kValue, K, O)
+                        A[k] = mappedValue
+                    }
+                    k++
+                }
+                return A
+            }
+        }
+    </script>
+</body>
+</html>

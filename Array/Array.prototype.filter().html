@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+        const result = words.filter(word => word.length > 6)
+        console.log(result);
+
+        function isBigEnough(element){
+            return element >= 2.1
+        }
+        var filtered = [1,2,3,4,5].filter(isBigEnough)
+        console.log(filtered);
+
+        var arr = [
+            { id: 15 },
+            { id: -1 },
+            { id: 0 },
+            { id: 3 },
+            { id: 12.2 },
+            { },
+            { id: null },
+            { id: NaN },
+            { id: 'undefined' }
+        ];
+
+        var invalidEntries = 0
+        function isNumber(obj){
+            return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj)
+        }
+        function filterByID(item){
+            if(isNumber(item.id) && item.id !== 0){
+                return true
+            }
+            invalidEntries++
+            return false
+        }
+        var arrByID = arr.filter(filterByID)
+        console.log(arrByID);
+        console.log(invalidEntries);
+
+        var fruits = ['apple', 'banana', 'grapes', 'mango', 'orange'];
+        function filterItems(query){
+            return fruits.filter(function(el){
+                return el.toLowerCase().indexOf(query.toLowerCase()) > -1
+            })
+        }
+        console.log(filterItems('ap'));
+        console.log(filterItems('an'));
+
+        const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange'];
+
+        // Polyfill
+        if(!Array.prototype.filter){
+            Array.prototype.filter = function(func,thisArg){
+                'use strict'
+                if(!((typeof func === 'Function' || typeof func === 'function') && this))
+                    throw new TypeError()
+
+                var len = this.length >>> 0,
+                    res = new Array(len),
+                    t = this, c = 0, i = -1
+                if(thisArg === undefined){
+                    while(++i !== len){
+                        if(i in this){
+                            if(func(t[i], i, t)){
+                                res[c++] = t[i]
+                            }
+                        }
+                    }
+                }
+                else{
+                    while(++i !== len){
+                        if(i in this){
+                            if(func.call(thisArg, t[i], i, t)){
+                                res[c++] = t[i]
+                            }
+                        }
+                    }
+                }
+                res.length = c
+                return res
+            }
+        }
+    </script>
+</body>
+</html>

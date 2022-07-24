@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {a:1,b:2,c:2}
+        for(var prop in obj){
+            console.log("obj." + prop + " =" + obj[prop]);
+        }
+
+        var triangle = {a:1,b:2,c:3}
+        function ColoredTriangle(){
+            this.color = 'red'
+        }
+        ColoredTriangle.prototype = triangle
+        var obj = new ColoredTriangle()
+        for(var prop in obj){
+            if(obj.hasOwnProperty(prop)){
+                console.log(`obj.${prop} = ${obj[prop]}`);
+            }
+        }
+    </script>
+</body>
+</html>

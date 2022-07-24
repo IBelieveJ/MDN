@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+        console.log(animals.slice(2));
+        console.log(animals.slice(2,4));
+        console.log(animals.slice(-2));
+
+        var myHonda = {
+            color:'red',
+            wheels:4,
+            engine:{
+                size:2.2,
+                power:1
+            }
+        }
+        var myCar = [myHonda,2,'cherry condition','purchased 1997']
+        var newCar = myCar.slice(0,2)
+        console.log('myCar = ' + JSON.stringify(myCar));
+        console.log('newCar = ' + JSON.stringify(newCar));
+        console.log(' myCar[0].color = ' + JSON.stringify(myCar[0].color));
+        console.log('newCar[0].color = ' + JSON.stringify(newCar[0].color));
+
+        function list(){
+            return Array.prototype.slice.call(arguments)
+        }
+        var list1 = list(1,2,3)
+        console.log(list1);
+
+        var unboundSlide = Array.prototype.slice
+        var slice = Function.prototype.call.bind(unboundSlide)
+        function list2(){
+            return slice(arguments)
+        }
+        var list3 = list2(1,2,3)
+
+        (function(){
+            'use strict'
+            var _slice = Array.prototype.slice
+            try{
+                _slice.call(document.documentElement)
+            }catch(e){
+                Array.prototype.slice = function(begin,end){
+                    end = (typeof end !== 'undefined') ? end : this.length
+
+                    if(Object.prototype.toString.call(this) === '[object Array]'){
+                        return _slice.call(this.begin,end)
+                    }
+                    var i ,cloned = [],
+                        size, len = this.length
+
+                    var start = begin || 0
+                    start = (start >= 0) ? start : Math.max(0, len + start)
+                    var upTo = (typeof end == 'number') ? Math.min(end, len) : len
+                    if(end < 0){
+                        upTo = len + end
+                    }
+                    size = upTo - start
+                    if(size > 0){
+                        cloned = new Array(size)
+                        if(this.charAt){
+                            for(i = 0; i < size; i++){
+
+                            }
+                        }else{
+                            for(i = 0; i < size; i++){
+                                cloned[i] = this[start + i]
+                            }
+                        }
+                    }
+                    return cloned
+                }
+            }
+        })()
+    </script>
+</body>
+</html>

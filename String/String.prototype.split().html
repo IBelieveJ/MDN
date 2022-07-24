@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const str = 'The quick brown fox jumps over the lazy dog.'
+        const words = str.split(' ')
+        console.log(words[3]);
+        const chars = str.split('')
+        console.log(chars[8]);
+        const strCopy = str.split()
+        console.log(strCopy);
+
+        function splitString(stringToSplit,separator){
+            var arrayOfString = stringToSplit.split(separator)
+            console.log('The original string is: "' + stringToSplit + '"');
+            console.log('The separator is: "' + separator + '"');
+            console.log("The array has " + arrayOfString.length + " elements: ");
+            for(var i = 0; i < arrayOfString.length; i++){
+                console.log(arrayOfString[i] + " /");
+            }
+            
+        }
+        var tempestString = "Oh brave new world that has such people in it."
+            var monthString = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec";
+            var space = " "
+            var comma = ","
+            splitString(tempestString,space)
+            splitString(tempestString)
+            splitString(monthString,comma)
+
+            const myString = 'this|is|a|Test';
+            const splits = myString.split(['|'])
+            console.log(splits);
+            const myString1 = 'ca,bc,a,bca,bca,bc';
+            const splits1 = myString1.split(['a','b'])
+            console.log(splits1);
+
+            const str1 = 'sfasfsafaasdfaadfwozuishuai'
+            const strReverse = str1.split('').reverse().join('')
+            console.log(strReverse);
+
+            
+    </script>
+</body>
+</html>

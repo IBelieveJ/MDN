@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array1 = [1,2,3]
+        console.log(array1.includes(2));
+        const pets = ['cat', 'dog', 'bat'];
+        console.log(pets.includes('cat'));
+        console.log(pets.includes('at'));
+
+        if(!Array.prototype.includes){
+            Object.defineProperty(Array.prototype,'includes',{
+                value:function(valueToFind,formIndex){
+                    if(this == null){
+                        throw new TypeError('"this" is null or not defined')
+                    }
+                    var o = Object(this)
+                    var len = o.length >>> 0
+                    if(len === 0){
+                        return false
+                    }
+                    var n = formIndex | 0
+                    var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0)
+                    function sameValueZero(x,y){
+                        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y))
+                    }
+                    while(k < len){
+                        if(sameValueZero(o[k],valueToFind)){
+                            return true
+                        }
+                        k++
+                    }
+                    return false
+                }
+            })
+        }
+    </script>
+</body>
+</html>

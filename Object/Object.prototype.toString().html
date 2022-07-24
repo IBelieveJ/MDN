@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Dog(name){
+            this.name = name
+        }
+        const dog1 = new Dog('Gabby')
+        Dog.prototype.toString = function doToString(){
+            return `${this.name}`
+        }
+        console.log(dog1.toString());
+
+        function Dog1(name,bread,color,sex){
+            this.name = name
+            this.bread = bread
+            this.color = color
+            this.sex = sex
+        }
+        var theDog = new Dog1('Gabby','Lab','chocolate','female')
+        console.log(theDog.toString());
+        Dog1.prototype.toString = function doToString(){
+            return `Dog ${this.name} is a ${this.sex} ${this.color} ${this.bread}`
+        }
+        console.log(theDog.toString());
+
+        var toString = Object.prototype.toString
+        console.log(toString.call(new Date()));
+        console.log(toString.call(new String));
+        console.log(toString.call(Math));
+        console.log(toString.call(undefined));
+        console.log(toString.call(null));
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array1 = ['a','b','c']
+        for(const element of array1){
+            console.log(element);
+        }
+
+        let iterable = [10,20,30]
+        for(let value of iterable){
+            value += 1
+            console.log(value);
+        }
+
+        // 迭代String
+        let iterable1 = 'boo'
+        for(let value of iterable1){
+            console.log(value);
+        }
+
+        let iterable2 = new Uint8Array([0x00,0xff])
+        for(let value of iterable2){
+            console.log(value);
+        }
+
+        let iterable3 = new Map([['a',1],['b',2],['c',3]])
+        for(let entry of iterable3){
+            console.log(entry);
+        }
+        for(let [key,value] of iterable3){
+            console.log(value);
+        }
+        console.log('----------------');
+        let iterable4 = new Set([1,2,3,4,5,1,2,3])
+        for(let value of iterable4){
+            console.log(value);
+        }
+
+        (function(){
+            for(let argument of arguments){
+                console.log(argument);
+            }
+        })(1,2,3)
+
+        // let articleParagraphs = document.querySelectorAll('acticle > p')
+        // for(let paragraph of articleParagraphs){
+        //     paragraph.classList.add('read')
+        // }
+
+        function* foo(){
+            yield 1
+            yield 2
+            yield 3
+        }
+        for(let o of foo()){
+            console.log(o);
+            break
+        }
+        console.log('----------------');
+
+        function* fibonacci(){
+            let [prev,curr] = [0,1]
+            // 0 1 , 1 1 , 1 2 , 2 3, 3 5, 5 8, 8 13 
+            for(;;){//while (true){
+                [prev,curr] = [curr,prev + curr]
+                yield curr
+            }
+        }
+        for(var n of fibonacci()){
+            console.log(n);
+            if(n > 10)
+                break
+        }
+
+        var gen = (function *(){
+            yield 1
+            yield 2
+            yield 3
+        })();
+        for(var o of gen){
+            console.log(o);
+            break
+        }
+        for(let o of gen){
+            console.log(o);
+        }
+        console.log('----------------');
+
+        var iterable5 = {
+            [Symbol.iterator](){
+                return {
+                    i:0,
+                    next(){
+                        if(this.i < 3){
+                            return { value: this.i++, done:false}
+                        }
+                        return { value: undefined, done:true}
+                    }
+                }
+            }
+        }
+
+        for(var value of iterable5){
+            console.log(value);
+        }
+        console.log('----------------');
+
+        Object.prototype.objCustom = function(){}
+        Array.prototype.arrCustom = function(){}
+        let iterable6 = [1,2,3]
+        iterable6.foo = 'hello'
+        console.log(iterable6);
+        for(let i in iterable6){
+            console.log(i,'a');
+        }
+        for(let i in iterable6){
+            if(iterable6.hasOwnProperty(i)){
+                console.log(i,'b');
+            }
+        }
+        for(let i of iterable6){
+            console.log(i,'c');
+        }
+        Object.prototype.objCustom = function(){}
+        Array.prototype.arrCustom = function(){}
+        let iterable7 = [3,5,6]
+        iterable7.foo = 'hello'
+        console.log('----------------');
+        var myArr = []
+        myArr[1] = 1
+        myArr[3] = 3
+        myArr[5] = 5
+        myArr[7] = 7
+        console.log(myArr);
+
+        var obj = {
+            0:1,
+            1:2,
+            2:3,
+            length:3
+        }
+    </script>
+</body>
+</html>

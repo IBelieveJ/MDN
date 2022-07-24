@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array1 = [5, 12, 8, 130, 44];
+        const found = array1.find(element => element > 10)
+        console.log(found);
+
+        var inventory = [
+            {name:'apples',quantity:2},
+            {name:'bananas',quantity:0},
+            {name:'cherries',quantity:5}
+        ]
+        function findCherries(fruit){
+            return fruit.name === 'cherries'
+        }
+        console.log(inventory.find(findCherries));
+
+        function isPrime (element,index,array){
+            var start = 2
+            while(start <= Math.sqrt(element)){
+                if(element % start++ < 1){
+                    return false
+                }
+            }
+            return element > 1
+        }
+        console.log([4,6,8,12].find(isPrime));
+        console.log([4,5,8,12].find(isPrime));
+
+        var a = [0,1,,,,5,6];
+        a.find(function(value,index){
+            console.log('Visited index ' + index + ' with value ' + value);
+        })
+        a.find(function(value,index){
+            if(index == 0){
+                console.log('Deleting a[5] with value ' + a[5]);
+                // delete a[5]
+                a.pop()
+            }
+            console.log('Visited index ' + index + ' with value ' + value);
+        })
+
+        if(!Array.prototype.find){
+            Object.defineProperty(Array.prototype,'find',{
+                value:function(predicate){
+                    if(this == null){
+                        throw new TypeError('"this" is null or not defined')
+                    }
+                    var o = Object(this)
+                    var len = o.length >>> 0
+                    if(typeof predicate !== 'function'){
+                        throw new TypeError('predicate must be a function')
+                    }
+
+                    var thisArg = arguments[1]
+                    var k = 0
+                    while(k < len){
+                        var kValue = o[k]
+                        if(predicate.call(thisArg,kValue,k,0)){
+                            return kValue
+                        }
+                        k++
+                    }
+                    return undefined
+                }
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const array = [1, 2, 3, 4, 5]
+        const even = (element) => element % 2 === 0
+        console.log(array.some(even));
+
+        function isBiggerThan10(element,index,array){
+            return element > 10
+        }
+        [1,2,3,4,5].some(isBiggerThan10);
+        [11,23,34,234,1,2,4,3,34234].some(isBiggerThan10);
+        console.log([1,2,4,3,5].some(x => x > 10));;
+        [112,123,13].some(x => x > 10)
+
+        var fruits = ['apple', 'banana', 'mango', 'guava'];
+        function checkAvailability(arr,val){
+            return arr.some(function(arrval){
+                return val === arrval
+            })
+        }
+        console.log(checkAvailability(fruits,'kela'));
+        console.log(checkAvailability(fruits,'banana'));
+
+        var fruits1 = ['apple', 'banana', 'mango', 'guava'];
+        function checkAvailability(arr,val){
+            return arr.some(arrVal => val === arrVal)
+        }
+        checkAvailability(fruits,'kela')
+        checkAvailability(fruits,'banana')
+
+        var TRUTHY_VALUES = [true, 'true', 1]
+
+        function getBoolean(value){
+            'use strict'
+            if(typeof value === 'string'){
+                value = value.toLowerCase().trim()
+            }
+            return TRUTHY_VALUES.some(function(t){
+                return t === value
+            })
+        }
+        console.log('-------------');
+        console.log(getBoolean(  false));
+        console.log(getBoolean('false   '));
+        console.log(getBoolean(1));
+        console.log(getBoolean('   TRUE  '));
+
+        if(!Array.prototype.some){
+            Array.prototype.some = function (fun/*,thisArg*/){
+                'use strict'
+                if(this == null){
+                    throw new TypeError('Array.prototype.some called on null or undefined')
+                }
+                if(typeof fun !== 'function'){
+                    throw new TypeError()
+                }
+                var t = Object(this)
+                var len = t.length >>> 0
+                var thisArg = arguments.length >= 2 ? arguments[1] : void 0
+                for(var i = 0; i < len; i++){
+                    if(i in t && fun.call(thisArg, t[i], i, t)){
+                        return true
+                    }
+                }
+                return false
+            }
+        }
+    </script>
+</body>
+</html>
